@@ -21,6 +21,11 @@ document.write('\
         document.getElementById("sofaChairLink").setAttribute("href", "/B/' + countryPrefix + '/furnitureCategory.html?cat=" + encodeURIComponent("Sofas & Chair"));\
         document.getElementById("cabinetStorageLink").setAttribute("href", "/B/' + countryPrefix + '/furnitureCategory.html?cat=" + encodeURIComponent("Cabinets & Storage"));\
         document.getElementById("retailProductLink").setAttribute("href", "/B/' + countryPrefix + '/retailProductsCategory.html?cat=" + encodeURIComponent("All Retail Products"));\
+        document.getElementById("lastTableDesk").setAttribute("href", "/B/' + countryPrefix + '/lastChanceCategory.html?cat=" + encodeURIComponent("Tables & Desks"));\
+        document.getElementById("lastBedMattress").setAttribute("href", "/B/' + countryPrefix + '/lastChanceCategory.html?cat=" + encodeURIComponent("Beds & Mattresses"));\
+        document.getElementById("lastSofaChair").setAttribute("href", "/B/' + countryPrefix + '/lastChanceCategory.html?cat=" + encodeURIComponent("Sofas & Chair"));\
+        document.getElementById("lastCabinetStorage").setAttribute("href", "/B/' + countryPrefix + '/lastChanceCategory.html?cat=" + encodeURIComponent("Cabinets & Storage"));\
+        document.getElementById("lastRetailProduct").setAttribute("href", "/B/' + countryPrefix + '/lastChanceCategory.html?cat=" + encodeURIComponent("All Retail Products"));\
     }, false);\
     function logout() {\
         sessionStorage.clear();\
@@ -101,6 +106,22 @@ document.write('\
                             <li><a href="/B/' + countryPrefix + '/furnitureCategory.html?cat=Study"><i class="icon icon-map-marker"></i> Study</a></li>\
                             <li><a href="/B/' + countryPrefix + '/furnitureCategory.html?cat=Children"><i class="icon icon-map-marker"></i> Children</a></li>\
                             <li><a id="retailProductLink"><i class="icon icon-coffee"></i> Retail Products</a></li>\
+                        </ul>\
+                    </li>\
+                    <li class="dropdown">\
+                        <a class="dropdown-toggle" href="#">\
+                            Last Chance<i class="icon icon-angle-down"></i>\
+                        </a>\
+                        <ul class="dropdown-menu">\
+                            <li><a id="lastTableDesk"><i class="icon icon-map-marker"></i> Tables & Desk</a></li>\
+                            <li><a href="/B/' + countryPrefix + '/lastChanceCategory.html?cat=Bathroom"><i class="icon icon-map-marker"></i> Bathroom</a></li>\
+                            <li><a id="lastBedMattress"><i class="icon icon-map-marker"></i> Beds & Mattresses</a></li>\
+                            <li><a id="lastSofaChair"><i class="icon icon-map-marker"></i> Sofas & Chair</a></li>\
+                            <li><a id="lastCabinetStorage"><i class="icon icon-map-marker"></i> Cabinets & Storage</a></li>\
+                            <li><a href="/B/' + countryPrefix + '/lastChanceCategory.html?cat=Lightings"><i class="icon icon-map-marker"></i> Lightings</a></li>\
+                            <li><a href="/B/' + countryPrefix + '/lastChanceCategory.html?cat=Study"><i class="icon icon-map-marker"></i> Study</a></li>\
+                            <li><a href="/B/' + countryPrefix + '/lastChanceCategory.html?cat=Children"><i class="icon icon-map-marker"></i> Children</a></li>\
+                            <li><a id="lastRetailProduct"><i class="icon icon-coffee"></i> Retail Products</a></li>\
                         </ul>\
                     </li>\
                 </ul>\
