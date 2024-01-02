@@ -628,15 +628,13 @@
                                             policy.</a>
                                     </div>
                                     <hr class="more-spaced " />
+
                                     <div class="container">
-                                        <p>Want to change your password?</p>
-                                        <button class="btn btn-primary" type="button" data-toggle="collapse"
-                                            data-target="#changePassword" aria-expanded="false"
-                                            aria-controls="changePassword">
-                                            Change Password
+                                        <button type="button" data-toggle="collapse" data-target="#changePassword"
+                                            aria-expanded="false" aria-controls="changePassword">
+                                            <h4>Change Password</h4>
                                         </button>
                                         <div id="changePassword" class="collapse">
-                                            <h4>Change Password</h4>
                                             <div class="form-group">
                                                 <label>Old Password (leave blank unless setting a new
                                                     password).</label>
@@ -651,13 +649,14 @@
                                                 <label>Re-enter New Password</label>
                                                 <input class="form-control" type="password" id="repassword">
                                             </div>
-                                            <div class="panel-footer" style="padding-bottom: 0px;">
-                                                <div class="row">
-                                                    <div class="form-group">
-                                                        <input type="submit" onclick="submitForm()" value="Submit"
-                                                            class="btn btn-primary" />
-                                                        <input type="reset" value="Reset" class="btn btn-primary" />
-                                                    </div>
+
+                                        </div>
+                                        <div style="padding-top: 5px;">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <input type="submit" onclick="submitForm()" value="Submit"
+                                                        class="btn btn-primary" />
+                                                    <input type="reset" value="Reset" class="btn btn-primary" />
                                                 </div>
                                             </div>
                                         </div>
