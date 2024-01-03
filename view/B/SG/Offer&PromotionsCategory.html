@@ -1,0 +1,226 @@
+<script src="../checkCountry.js"></script>
+<html>
+<script src="../../header.js"></script>
+
+<body>
+    <script>
+        //get category from query parameter
+        var currentUrl = new URL(window.location.href);
+        var cat = currentUrl.searchParams.get("cat");
+        document.addEventListener('DOMContentLoaded', function () {
+            var countryId = localStorage.getItem('countryId');
+            fetch(new Request('/api/getPromotionByCat?cat=' + encodeURIComponent(cat) + '&countryId=' + countryId,
+                {
+                    method: 'GET'
+                })).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    console.log(data);
+                    var htmlTxt = '';
+                    if (data.length == 0) { //if member do not have any bought items
+                        htmlTxt += '<h5 class="center">No promotions available</h5>';
+                        document.getElementById("sortBtn").setAttribute('disabled', true);
+                    }
+                    else {
+                        // var furniture = data[0];
+                        //generate html for promotions
+                        data.forEach(promotion => {
+                            let endDate = new Date(promotion.endDate);
+                            let currentDate = new Date('2014-11-23');
+                            if (endDate - currentDate > 0 && endDate - currentDate <= 86400000) {
+                                htmlTxt += '\
+                                <li class="col-md-3 col-sm-6 col-xs-12 product" style="padding-bottom: 1%;padding-top: 2%;">\
+                                <span class="product-thumb-info">\
+                                    <span class="product-thumb-info-image">\
+                                        <span class="product-thumb-info-act">\
+                                            <span class="product-thumb-info-act-left">\
+                                                <a href="furnitureProductDetails.html?sku=' + promotion.sku + '" style="color: white"><em>View Details</em></a>\
+                                            </span>\
+                                        </span>\
+                                        <img alt=""  class="img-responsive" src="' + promotion.imageURL.substring(19) + '">\
+                                    </span>\
+                                    <span class="product-thumb-info-content">\
+                                        <h4>' + promotion.item + '</h4>\
+                                        <span class="product-thumb-info-act-left">\
+                                            ' + promotion.description + '\
+                                        </span><br/>\
+                                        <span class="product-thumb-info-act-left">\
+                                            End Date: ' + endDate.getDate() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getFullYear() + '\
+                                        </span><br/>\
+                                        <span class="product-thumb-info-act-left">\
+                                            Price: $' + promotion.price.toFixed(2) + '\
+                                        </span><br/>\
+                                        <form action="furnitureProductDetails.html">\
+                                            <input type="hidden" name="sku" value="' + promotion.sku + '"/>\
+                                            <input type="submit" class="btn btn-primary btn-block" value="More Details"/>\
+                                        </form>';
+                                htmlTxt += '';
+                            }
+                        });
+
+                        if (htmlTxt == '') {
+                            htmlTxt += '<h5 class="center">No promotions available</h5>';
+                            document.getElementById("sortBtn").setAttribute('disabled', true);
+                        }
+
+                    }
+
+                    document.getElementById("lastChanceDisplay").innerHTML = htmlTxt;
+                    document.getElementById("categoryTitle").innerHTML = cat;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        }, false);
+
+        function sortPromotion(method) {
+            console.log("sortPromotion is called");
+            var countryId = localStorage.getItem('countryId');
+            fetch(new Request('/api/getPromotionByCat?cat=' + encodeURIComponent(cat) + '&countryId=' + countryId,
+                {
+                    method: 'GET'
+                })).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    console.log(data);
+                    var htmlTxt = '';
+                    if (data.length == 0) { //if member do not have any bought items
+                        htmlTxt += '<h5 class="center">No promotions available</h5>';
+                        document.getElementById("sortBtn").setAttribute('disabled', true);
+                    }
+                    else {
+                        // var furniture = data[0];
+                        //generate html for promotions
+                        let sortedData;
+                        if (method == 'name') {
+                            sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
+                            console.log("sorted by name");
+                        }
+                        else if (method == 'LTH') {
+                            sortedData = data.sort((a, b) => a.price - b.price);
+                            console.log("sorted by LTH");
+                        }
+                        else if (method == 'HTL') {
+                            sortedData = data.sort((a, b) => b.price - a.price);
+                            console.log("sorted by HTL");
+                        }
+
+                        sortedData.forEach(promotion => {
+                            let endDate = new Date(promotion.endDate);
+                            let currentDate = new Date('2014-11-23');
+                            if (endDate - currentDate > 0 && endDate - currentDate <= 86400000) {
+                                htmlTxt += '\
+                            <li class="col-md-3 col-sm-6 col-xs-12 product" style="padding-bottom: 1%;padding-top: 2%;">\
+                                <span class="product-thumb-info">\
+                                    <span class="product-thumb-info-image">\
+                                        <span class="product-thumb-info-act">\
+                                            <span class="product-thumb-info-act-left">\
+                                                <a href="furnitureProductDetails.html?sku=' + promotion.sku + '" style="color: white"><em>View Details</em></a>\
+                                            </span>\
+                                        </span>\
+                                        <img alt=""  class="img-responsive" src="' + promotion.imageURL.substring(19) + '">\
+                                    </span>\
+                                    <span class="product-thumb-info-content">\
+                                        <h4>' + promotion.item + '</h4>\
+                                        <span class="product-thumb-info-act-left">\
+                                            ' + promotion.description + '\
+                                        </span><br/>\
+                                        <span class="product-thumb-info-act-left">\
+                                            End Date: ' + endDate.getDate() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getFullYear() + '\
+                                        </span><br/>\
+                                        <span class="product-thumb-info-act-left">\
+                                            Price: $' + promotion.price.toFixed(2) + '\
+                                        </span><br/>\
+                                        <form action="furnitureProductDetails.html">\
+                                            <input type="hidden" name="sku" value="' + promotion.sku + '"/>\
+                                            <input type="submit" class="btn btn-primary btn-block" value="More Details"/>\
+                                        </form>';
+                                htmlTxt += '</span></span></li>';
+                            }
+                        });
+
+                        if (htmlTxt == '') {
+                            htmlTxt += '<h5 class="center">No promotions available</h5>';
+                            document.getElementById("sortBtn").setAttribute('disabled', true);
+                        }
+
+                    }
+
+                    document.getElementById("lastChanceDisplay").innerHTML = htmlTxt;
+                    document.getElementById("categoryTitle").innerHTML = cat;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+    </script>
+    <div class="body">
+        <script src="menu2.js"></script>
+        <div class="body">
+            <div role="main" class="main">
+                <section class="page-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>Offers and Promotions</h2>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="container">
+                    <script src="/displayMessageLong.js"></script>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h2 class="shorter"><strong id="categoryTitle"></strong></h2>
+                        </div>
+                        <div class="col-md-2 offset-md-4">
+                            <div class="dropdown">
+                                <button class="btn-danger dropdown-toggle" type="button" data-toggle="dropdown"
+                                    id="sortBtn">
+                                    Sort By<i class="icon icon-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" onclick="sortPromotion('name')">Product Name</a></li>
+                                    <li><a class="dropdown-item" onclick="sortPromotion('LTH')">Price (Lowest to
+                                            Highest)</a></li>
+                                    <li><a class="dropdown-item" onclick="sortPromotion('HTL')">Price (Highest to
+                                            Lowest)</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul id="lastChanceDisplay" class="products product-thumb-info-list"
+                            style="list-style-type: none; margin-left: -3%;" data-plugin-masonry></ul>
+                    </div>
+                    <hr class="tall">
+                </div>
+            </div>
+        </div>
+        <script src="../footer.js"></script>
+    </div>
+</body>
+
+</html>
+
+<!-- <li class="col-md-3 col-sm-6 col-xs-12 product" style="padding-bottom: 1%;padding-top: 2%; width:500px; height:auto;">\
+    <span class="product-thumb-info">\
+        <span class="product-thumb-info-image">\
+            <span class="product-thumb-info-act">\
+                <span class="product-thumb-info-act-left">\
+                    <a href="furnitureProductDetails.html?sku=' + promotion.sku + '" style="color: white"><em>View Details</em></a>\
+                </span>\
+            </span>\
+            <img alt=""  class="img-responsive" src="' + promotion.imageURL.substring(19) + '">\
+        </span>\
+        <span class="product-thumb-info-content" style="background-color: rgba(0, 0, 0, 0);">\
+        <h4>' + promotion.item + '</h4>\
+        <span class="product-thumb-info-act-left" style="background-color: rgba(0, 0, 0, 0);">\
+            ' + promotion.description + '\
+        </span><br/>\
+        <span class="product-thumb-info-act-left" style="background-color: rgba(0, 0, 0, 0);">\
+        End Date: ' + endDate.getDate() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getFullYear() + '\
+        </span><br/>\
+        <span class="product-thumb-info-act-left" style="background-color: rgba(0, 0, 0, 0);">\
+        Price: $' + promotion.price.toFixed(2) + '\
+        </span><br/>\
+        </span>\ -->
