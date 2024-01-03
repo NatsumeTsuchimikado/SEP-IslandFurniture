@@ -26,7 +26,6 @@ document.write('\
         document.getElementById("lastSofaChair").setAttribute("href", "/B/' + countryPrefix + '/lastChanceCategory.html?cat=" + encodeURIComponent("Sofas & Chair"));\
         document.getElementById("lastCabinetStorage").setAttribute("href", "/B/' + countryPrefix + '/lastChanceCategory.html?cat=" + encodeURIComponent("Cabinets & Storage"));\
         document.getElementById("lastRetailProduct").setAttribute("href", "/B/' + countryPrefix + '/lastChanceCategory.html?cat=" + encodeURIComponent("All Retail Products"));\
-        document.getElementById("lastBedMattressPromo").setAttribute("href", "/B/' + countryPrefix + '/Offer&PromotionsCategory.html?cat=" + encodeURIComponent("Beds & Mattresses"));\
     }, false);\
     function logout() {\
         sessionStorage.clear();\
