@@ -64,36 +64,20 @@
         var htmlTxt = '';
         if (data.length == 0) {
             htmlTxt += '<h5 class="center">No promotions available</h5>';
-           // document.getElementById("sortBtn").setAttribute('disabled', true);
         } else {
             data.forEach(promotion => {
-                let endDate = new Date(promotion.endDate);
                     htmlTxt += '\
-                    <li class="col-md-3 col-sm-6 col-xs-12 product" style="padding-bottom: 1%;padding-top: 2%;">\
-                        <span class="product-thumb-info">\
-                            <span class="product-thumb-info-image">\
-                                <span class="product-thumb-info-act">\
-                                    <span class="product-thumb-info-act-left">\
-                                        <a href="furnitureProductDetails.html?sku=' + promotion.sku + '" style="color: white"><em>View Details</em></a>\
+                    <li class="col-md-3 col-sm-6 col-xs-12 product" style="padding-bottom: 1%;padding-top: 2%; width: 550px; height:auto;">\
+                                <span class="product-thumb-info">\
+                                    <span class="product-thumb-info-image">\
+                                        <span class="product-thumb-info-act">\
+                                            <span class="product-thumb-info-act-left">\
+                                                <a href="furnitureProductDetails.html?sku=' + promotion.sku + '" style="color: white"><em>View Details</em></a>\
+                                            </span>\
+                                        </span>\
+                                        <img alt=""  class="img-responsive" src="' + promotion.imageURL.substring(19) + '">\
                                     </span>\
-                                </span>\
-                                <img alt=""  class="img-responsive" src="' + promotion.imageURL.substring(19) + '">\
-                            </span>\
-                            <span class="product-thumb-info-content">\
-                                <h4>' + promotion.item + '</h4>\
-                                <span class="product-thumb-info-act-left">\
-                                    ' + promotion.description + '\
-                                </span><br/>\
-                                <span class="product-thumb-info-act-left">\
-                                    End Date: ' + endDate.getDate() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getFullYear() + '\
-                                </span><br/>\
-                                <span class="product-thumb-info-act-left">\
-                                    Price: $' + promotion.price.toFixed(2) + '\
-                                </span><br/>\
-                                <form action="furnitureProductDetails.html">\
-                                    <input type="hidden" name="sku" value="' + promotion.sku + '"/>\
-                                    <input type="submit" class="btn btn-primary btn-block" value="More Details"/>\
-                                </form>';
+                                    ';
                     htmlTxt += '</span></span></li>';
             });
 
