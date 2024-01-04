@@ -15,19 +15,6 @@ app.get('/api/getPromotionByCat', function (req, res) {
         });
 });
 
-app.get('/api/getPromotionAllByCat', function (req, res) {
-    var cat = req.query.cat;
-    var countryId = req.query.countryId;
-    promotion.getPromotionByCat(countryId, cat)
-        .then((result) => {
-            res.send(result);
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).send("Failed to get promotion by category");
-        });
-});
-
 app.get('/api/getPromotionAll', function (req, res) {
     var countryId = req.query.countryId;
     promotion.getPromotionAll(countryId)
@@ -39,4 +26,5 @@ app.get('/api/getPromotionAll', function (req, res) {
             res.status(500).send("Failed to get promotion by category");
         });
 });
+
 module.exports = app;
