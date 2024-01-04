@@ -124,6 +124,11 @@ document.write('\
                             <li><a id="lastRetailProduct"><i class="icon icon-coffee"></i> Retail Products</a></li>\
                         </ul>\
                     </li>\
+                    <li class="dropdown">\
+                        <a class="dropdown-toggle" href="/B/' + countryPrefix + '/AllOffer&Promotions.html">\
+                            Offers and Promotions<i class=""></i>\
+                        </a>\
+                    </li>\
                 </ul>\
             </nav>\
         </div>\
